@@ -1,5 +1,5 @@
 {"artifacts":[
-				{"artifact":"kurento-client","version":"6.2.0"},
-				{"artifact":"kurento-client","version":"5.0.3"}
+				{"artifact":"kurento-client","version":"6.2.0","server":"npmjs.com"},
+				{"artifact":"kurento-client","version":"5.0.3","server":"npmjs.com"}
 			]	
 }

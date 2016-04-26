@@ -3,13 +3,15 @@ package model;
 public class art {
 	String artifact;
 	String version;
+	String server;
 	
 	art(){}
 
-	public art(String artifact, String version) {
+	public art(String artifact, String version,String server) {
 		super();
 		this.artifact = artifact;
 		this.version = version;
+		this.server=server;
 	}
 
 	public String getArtifact() {
@@ -26,6 +28,14 @@ public class art {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
 	};	
 	
 }

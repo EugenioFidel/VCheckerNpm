@@ -17,19 +17,14 @@ import model.art;
 import model.artifactList;
 
 public class VCheckerNpm {
-	public static void main(String[] args) {
-		boolean result=false;    	
+	public static void main(String[] args) {   	
     	
     	String file="./"+args[0];
-    	result=CheckVersions(file);
-    	if(result){
-    		System.out.println("The artifacts in the versions are located in npmjs.org");
-    	}else{
-    		System.out.println("The artifacts in the versions are not located in npmjs.org");
-    	} 
+    	CheckVersions(file);
+    	
 	}
 	
-	private static boolean CheckVersions(String file) {
+	private static void CheckVersions(String file) {
 		boolean comprobar=true;
 		//We get the artifact and the version from config.json
 		ObjectMapper mapper = new ObjectMapper();			
@@ -51,15 +46,21 @@ public class VCheckerNpm {
 		
 		while(it.hasNext()){
 			art artefacto=it.next();
-			comprobar=CheckVersion(artefacto);
+			if(artefacto.getServer().equals("npmjs.com")){
+				comprobar=CheckVersionNpm(artefacto);
+			}
+			
 			if(!comprobar){
-				return comprobar; 
-			}			
+				 System.out.println("The artifact "+artefacto.getArtifact()+", version "+artefacto.getVersion()
+						 +" is notlocated in "+artefacto.getServer());
+			}else{
+				System.out.println("The artifact "+artefacto.getArtifact()+", version "+artefacto.getVersion()
+						 +" is located in "+artefacto.getServer());
+			}	
 		}	
-		return comprobar;
 	}
 
-	private static boolean CheckVersion(art artefacto) {
+	private static boolean CheckVersionNpm(art artefacto) {
 //		 running the npm view comand
 		String cmd="npm view "+artefacto.getArtifact()+"@"+artefacto.getVersion();
 		Process process=null;
